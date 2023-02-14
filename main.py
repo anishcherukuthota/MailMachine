@@ -6,7 +6,7 @@ import re
 # functionality: searches through the email-list.txt file and identifies the email associated with the given user
 # return: the email associated with the user if they exist in the text file, None otherwise
 def get_email(user):
-  email_list = open("FILE PATH", 'r') # "FILE PATH" represents the path of the text file storing user id's and their corresponding emails
+  email_list = open("/email-list.txt", 'r') # replace "/email-list.txt" with the path of the text file storing user id's and their corresponding emails
   for line in email_list:
     user_info = line.strip().split(',')
     if (user_info[0] == str(user.id)):
@@ -18,7 +18,7 @@ def get_email(user):
 # return: none
 def add_email(message):
   if (re.fullmatch(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b", message.content)):
-    email_list = open("FILE PATH", 'a+') # "FILE PATH" represents path of text file storing user id's and their corresponding emails
+    email_list = open("/email-list.txt", 'a+') # replace "/email-list.txt" with the path of the text file storing user id's and their corresponding emails
     if (get_email(message.author) == None):
       print("user does not exist")
       email_list.write(str(message.author.id) + "," + message.content + "\n")
@@ -116,4 +116,4 @@ async def on_message(message):
     send_email(decompose(message))
 
 # launches bot
-client.run("TOKEN") # "TOKEN" represents the discord bot token used to authenticate the bot
+client.run("TOKEN") # replace "TOKEN" with the discord bot token used to authenticate the bot
